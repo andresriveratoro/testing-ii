@@ -1,4 +1,5 @@
 import React from 'react';
+import Display from './Display';
 
 class Dashboard extends React.Component {
   constructor() {
@@ -10,14 +11,14 @@ class Dashboard extends React.Component {
     };
   }
 
-  /** 
-   * if 3 strikes, reset strikes and balls to 0 
+  /**
+   * if 3 strikes, reset strikes and balls to 0
    * else, increment strikes by 1
    */
   handleStrikes = () => {
-    this.setState(prevState => {
+    this.setState((prevState) => {
       if (prevState.strikes === 2) {
-        return { 
+        return {
           strikes: 0, balls: 0, fouls: 0,
         };
       }
@@ -32,13 +33,13 @@ class Dashboard extends React.Component {
    * else, increment balls by 1
    */
   handleBall = () => {
-    this.setState(prevState => {
+    this.setState((prevState) => {
       if (prevState.balls === 3) {
-        return { 
+        return {
           strikes: 0, balls: 0, fouls: 0,
         };
       }
-      return { 
+      return {
         balls: prevState.balls + 1,
       };
     });
@@ -67,15 +68,16 @@ class Dashboard extends React.Component {
   render() {
     return (
       <div>
+        <Display strikes={this.state.strikes} balls={this.state.balls} />
         <h2>Dashboard</h2>
         <button onClick={this.handleStrikes}>Strikes</button>
         <button onClick={this.handleBall}>Balls</button>
         <button onClick={this.handleFoul}>Foul</button>
         <button onClick={this.handleHit}>Hit</button>
-        <div data-testid='strikesCounter'>{this.state.strikes}</div>
+        {/* <div data-testid='strikesCounter'>{this.state.strikes}</div> */}
       </div>
     );
-  };
-};
+  }
+}
 
 export default Dashboard;
